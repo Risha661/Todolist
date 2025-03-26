@@ -7,7 +7,7 @@
   <title>JavaScript</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="css/style.css">
-  <script src="./script.js" type="module"></script>
+  <script src="./script.js" type="module" defer></script>
 </head>
 
 <body>
@@ -63,13 +63,11 @@
           <label class="calc__label" for="y">Введите второе число</label>
           <input class="calc__input" id="y" name="y" type="number">
 
-
-
           <div class="calc__btn-wrapper">
-            <button class="calc__btn" type="button">+</button>
-            <button class="calc__btn" type="button">-</button>
-            <button class="calc__btn" type="button">х</button>
-            <button class="calc__btn" type="button">÷</button>
+            <button class="calc__btn" type="button" id="plus" onclick="op='+'">+</button>
+            <button class="calc__btn" type="button" id="minus" onclick="op='-'">-</button>
+            <button class="calc__btn" type="button" id="times" onclick="op='*'">x</button>
+            <button class="calc__btn" type="button" id="divide" onclick="op='/'">÷</button>
           </div>
           <span class="calc__label">Результат</span>
           <output class="calc__result" id name="result">0</output>

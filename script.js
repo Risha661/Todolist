@@ -1,3 +1,5 @@
+import "./modules/calc.js";
+
 const todoForm = document.querySelector('#form-todo');
 console.log(todoForm);
 const author = document.getElementById('author');
