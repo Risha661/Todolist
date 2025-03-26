@@ -26,6 +26,9 @@ const base = {
     console.log(base.todo);
 
     return todo;
+  },
+  remove(id) {
+    base.todo = base.todo.filter(item => item.id !== id);
   }
 };
 
@@ -48,11 +51,14 @@ function createTodo(objTodo) {
       <h3 class="post__author">${objTodo.author}</h3>
       <p class="post__todo">${objTodo.post}</p>
       ${!objTodo.ready ?
-      ` <button 
+        `<button 
             class="post__ready" 
             type="button"
-            data-id="${objTodo.id}"            >✔</button>` :
-      ''
+            data-id="${objTodo.id}">✔</button>` :
+        `<button 
+            class="post__remove" 
+            type="button"
+            data-id="${objTodo.id}">❌</button>`
       }
     </article>
   `;
@@ -72,16 +78,29 @@ function renderTodo() {
 }
 
 function checkTodo(event) {
-  const btn = event.target.closest('.post__ready');
-  console.log(btn);
+  const btnReady = event.target.closest('.post__ready');
+  const btnRemove = event.target.closest('.post__remove');
 
-  if (btn) {
-    const post = btn.closest('.post');
-    btn.remove();
+  if (btnReady) {
+    const post = btnReady.closest('.post');
+    btnReady.remove();
     post.classList.add('post_complete');
-    const id = btn.dataset.id;
+    const id = btnReady.dataset.id;
     base.check(id);
     setTodoLS();
+    
+    const removeButton = document.createElement('button');
+    removeButton.classList.add('post__remove');
+    removeButton.type = 'button';
+    removeButton.dataset.id = id;
+    removeButton.textContent = '❌';
+    post.appendChild(removeButton);
+    
+  } else if (btnRemove) {
+    const id = btnRemove.dataset.id;
+    base.remove(id);
+    setTodoLS();
+    btnRemove.closest('.todo__list-item').remove();
   }
 }
 
@@ -107,4 +126,4 @@ const removeItemStorage = () => {
 renderTodo();
 
 todoForm.addEventListener('submit', addTodo);
-list/addEventListener('click', checkTodo);
+list.addEventListener('click', checkTodo);
