@@ -4,6 +4,7 @@ const author = document.getElementById('author');
 const post= document.getElementById('post');
 const todoTitle = document.querySelector('.todo__title');
 const list = document.querySelector('.todo__list');
+const todoCount = document.querySelector('.todo__count');
 
 const base = {
   employee: "Петров Сергей Олегович",
@@ -71,9 +72,10 @@ function createTodo(objTodo) {
 }
 
 function renderTodo() {
-  for (let i=0;i < base.todo.length; i++) {
+  for (let i = 0;i < base.todo.length; i++) {
     const todoLi = createTodo(base.todo[i]);
     list.append(todoLi);
+    todoCount.textContent = base.todo.length;
   }
 }
 
